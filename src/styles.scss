@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css?family=Signika&display=swap');
+
+html,
+body {
+  background-image: linear-gradient(to right, rgba(147, 210, 145, 1), rgba(147, 210, 145, 0.4), rgba(147, 210, 145, 1));
+  overflow-x: hidden;
+  font-family: 'Signika', sans-serif;
+}
+
+.pointer {
+  cursor: pointer;
+}

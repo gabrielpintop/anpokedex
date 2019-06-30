@@ -1,7 +1,4 @@
-interface SimplePokemon {
-  name: string;
-  url: string;
-}
+import { SimplePokemon } from './simplePokemon';
 
 export interface PokemonList {
   count: number;

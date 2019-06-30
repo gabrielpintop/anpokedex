@@ -9,7 +9,7 @@ export class PokemonsService {
   constructor(private http: HttpClient) {}
 
   // Get the list of pokemon with their names and details url
-  getPokemonsList(nextUrl: string): Promise<PokemonList | null> {
+  getPokemonsList(nextUrl: string): Promise<PokemonList | string> {
     return new Promise((resolve, reject) => {
       this.http.get(nextUrl).subscribe(
         (pokemonList: PokemonList) => {
@@ -17,7 +17,7 @@ export class PokemonsService {
         },
         error => {
           console.log(error);
-          reject(null);
+          reject('There was an error loading the Pokemons');
         }
       );
     });
