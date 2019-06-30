@@ -1,6 +1,12 @@
 <div class="row mr-3 ml-3 mb-3">
-  <div *ngFor="let simplePokemon of pokemonList.results; index as i" class="col-lg-3 col-md-4 col-6 text-center">
-    <app-pokemon-simple-details [simplePokemon]="simplePokemon" [pokemonId]="i + 1"></app-pokemon-simple-details>
+  <ng-container *ngIf="pokemonList.results.length > 0">
+    <div *ngFor="let simplePokemon of pokemonList.results; index as i" class="col-lg-3 col-md-4 col-6 text-center">
+      <app-pokemon-simple-details [simplePokemon]="simplePokemon" [pokemonId]="i + 1"></app-pokemon-simple-details>
+    </div>
+  </ng-container>
+
+  <div class="col-12 text-center mb-2" *ngIf="!loading && pokemonList.results.length === 0">
+    <h3>There are no Pokemons to show</h3>
   </div>
 
   <div class="col-12 text-center">
