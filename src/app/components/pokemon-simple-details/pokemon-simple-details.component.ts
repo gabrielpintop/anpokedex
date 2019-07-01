@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class PokemonSimpleDetailsComponent implements OnInit {
   @Input() simplePokemon: SimplePokemon;
 
-  @Input() pokemonId: number;
+  @Input() pokemonId: string;
 
   constructor() {}
 

@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 export class PokemonsListComponent implements OnInit {
   private pokemonRequestLimit = '20';
 
+  private urlSplitLength = 8;
+
   public loading = true;
 
   public pokemonList: PokemonList = {
@@ -21,6 +23,8 @@ export class PokemonsListComponent implements OnInit {
     previous: '',
     results: []
   };
+
+  private urlSplittedArray: string[];
 
   constructor(private pokemonsService: PokemonsService) {}
 
@@ -38,11 +42,18 @@ export class PokemonsListComponent implements OnInit {
           ...pokemonList,
           results: [].concat(this.pokemonList.results, pokemonList.results)
         };
+        console.log(pokemonList.results);
+
         this.loading = false;
       })
       .catch((err: string) => {
         alert(err);
         this.loading = false;
       });
+  }
+
+  // Gets the id of the current Pokemon based on the received url
+  getPokemonId(url: string) {
+    return url.split('/')[this.urlSplitLength - 2];
   }
 }

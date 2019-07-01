@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Service
 import { PokemonsService } from './services/pokemons.service';
@@ -27,7 +28,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     AppRoutingModule,
     BrowserModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [PokemonsService],
   bootstrap: [AppComponent]
