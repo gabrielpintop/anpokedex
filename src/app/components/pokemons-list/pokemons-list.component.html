@@ -18,5 +18,5 @@
   </div>
 </div>
 <app-pokemon-modal-details [showModal]="showPokemonInfo" [pokemon]="selectedPokemon"
-  (closeModal)="closePokemonInformationModal()">
+  [specieInformation]="specieInformation" (closeModal)="closePokemonInformationModal()">
 </app-pokemon-modal-details>

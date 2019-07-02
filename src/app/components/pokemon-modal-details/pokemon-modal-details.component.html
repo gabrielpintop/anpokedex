@@ -15,38 +15,77 @@
               </button>
             </div>
             <div class="col-6 text-right mb-1">
-              <img class="simplePokemonImage" [src]="pokemon.sprites.front_default" alt="">
+              <img class="simplePokemonImage" [src]="pokemon.sprites.front_default" alt="" />
             </div>
             <div class="col-6 text-left mb-1">
-              <img class="simplePokemonImage" [src]="pokemon.sprites.back_default" alt="">
+              <img class="simplePokemonImage" [src]="pokemon.sprites.back_default" alt="" />
             </div>
             <div class="col-12 text-center mb-0">
-              <h2 class="mb-0">{{pokemon.name | titlecase}}</h2>
+              <h2 class="mb-0">{{ pokemon.name | titlecase }}</h2>
             </div>
             <div class="col-4 text-center">
-              <h5 class="mb-0">{{getWeightInKilograms(pokemon.weight)}}</h5>
-              <span class="small mt-0">Weight</span>
+              <h5 class="mb-0">{{ getWeightInKilograms(pokemon.weight) }}</h5>
+              <span class="small mt-0">
+                <fa-icon [icon]="faWeightHanging"></fa-icon>&nbsp;Weight
+              </span>
             </div>
             <div class="col-4 text-center my-auto">
               <span class="badge badge-pill m-1 badge-dark shadow"
-                *ngFor="let type of pokemon.types">{{type.type.name}}</span>
+                *ngFor="let type of pokemon.types">{{ type.type.name }}</span>
             </div>
             <div class="col-4 text-center">
-              <h5 class="mb-0">{{getHeightInMeters(pokemon.height)}}</h5>
-              <span class="small mt-0">Height</span>
+              <h5 class="mb-0">{{ getHeightInMeters(pokemon.height) }}</h5>
+              <span class="small mt-0">
+                <fa-icon [icon]="faArrowsAltV"></fa-icon>&nbsp;Height
+              </span>
             </div>
             <div class="col-12">
               <hr />
             </div>
-            <!-- <div class="col-md-6 col-12">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item active text-center">Abilities</li>
-                <li class="list-group-item" *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</li>
-              </ul>
-            </div> -->
+            <ng-container *ngIf="specieInformation">
+              <div class="col-12">
+                <p class="mb-0 text-center">
+                  {{
+                      getTranslation(specieInformation.flavor_text_entries)
+                        .flavor_text
+                    }}
+                </p>
+              </div>
+              <div class="col-12">
+                <hr />
+              </div>
+            </ng-container>
             <div class="col-md-6 col-12 mx-auto">
               <app-pokemon-stats-chart [pokemonStats]="pokemon.stats" [pokemonName]="pokemon.name | titlecase">
               </app-pokemon-stats-chart>
+            </div>
+            <div class="col-12 d-md-none d-block">
+              <hr />
+            </div>
+            <div class="col-md-6 col-12">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-dark text-center text-white">
+                  Abilities
+                </li>
+                <ng-container *ngIf="loadedAbilities && abilities.length > 0">
+                  <li class="list-group-item" *ngFor="let ability of abilities">
+                    <div class="row">
+                      <div class="col-lg-3 col-4">
+                        {{ getTranslation(ability.names).name }}
+                      </div>
+                      <div class="col-lg-9 col-8">
+                        {{getTranslation(ability.flavor_text_entries).flavor_text}}
+                      </div>
+                    </div>
+                  </li>
+                </ng-container>
+                <li *ngIf="!loadedAbilities" class="list-group-item text-center">
+                  <app-spinner></app-spinner>
+                </li>
+                <li *ngIf="loadedAbilities && abilities.length === 0" class="list-group-item text-center">
+                  This Pokemon doesn't have abilities
+                </li>
+              </ul>
             </div>
           </ng-container>
         </div>

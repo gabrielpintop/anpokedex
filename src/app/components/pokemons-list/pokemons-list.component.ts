@@ -3,6 +3,7 @@ import { PokemonList } from 'src/app/interfaces/pokemonList';
 import { PokemonsService } from 'src/app/services/pokemons.service';
 import { environment } from 'src/environments/environment';
 import { Pokemon } from 'src/app/interfaces/pokemon';
+import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
 
 @Component({
   selector: 'app-pokemons-list',
@@ -18,7 +19,7 @@ export class PokemonsListComponent implements OnInit {
 
   public pokemonList: PokemonList = {
     count: 0,
-    next: `${environment.pokeApiPokemonUrl}?offset=0&limit=${
+    next: `${environment.pokeApiPokemonUrl}/pokemon?offset=0&limit=${
       this.pokemonRequestLimit
     }`,
     previous: '',
@@ -26,6 +27,8 @@ export class PokemonsListComponent implements OnInit {
   };
 
   public selectedPokemon: Pokemon;
+
+  public specieInformation: any;
 
   public selectedPokemonSpecie;
 
@@ -41,6 +44,7 @@ export class PokemonsListComponent implements OnInit {
   closePokemonInformationModal(): void {
     this.showPokemonInfo = false;
     this.selectedPokemon = null;
+    this.specieInformation = null;
   }
 
   // Get the list of pokemons with a defined limit and concatenates the previous pokemons
@@ -75,12 +79,24 @@ export class PokemonsListComponent implements OnInit {
     this.pokemonsService
       .getPokemonInfo(pokemonName)
       .then((pokemon: Pokemon) => {
-        this.selectedPokemon = pokemon;
-        console.log(this.selectedPokemon);
+        this.getPokemonSpecieInformation(pokemon.species.url, pokemon);
       })
       .catch(err => {
         this.showPokemonInfo = false;
         alert(err);
+      });
+  }
+
+  // Get pokemon specie information
+  getPokemonSpecieInformation(specieUrl: string, pokemon: Pokemon): void {
+    this.pokemonsService
+      .getPokemonSpecieInformation(specieUrl)
+      .then((data: DetailedInfo) => {
+        this.specieInformation = data;
+        this.selectedPokemon = pokemon;
+      })
+      .catch(err => {
+        this.selectedPokemon = pokemon;
       });
   }
 }

@@ -1,5 +1,6 @@
 import { AttributeInfo } from './attributeInfo';
 import { Stat } from './pokemonStat';
+import { Ability } from './pokemonAbility';
 
 interface Sprites {
   back_default: string;
@@ -15,12 +16,6 @@ interface Type {
   type: AttributeInfo;
 }
 
-interface Ability {
-  is_hidden: boolean;
-  slot: number;
-  ability: AttributeInfo;
-}
-
 export interface Pokemon {
   height: number;
   id: number;
@@ -29,6 +24,7 @@ export interface Pokemon {
   base_experience: number;
   abilities: Ability[];
   moves: Move[];
+  species: AttributeInfo;
   sprites: Sprites;
   stats: Stat[];
   types: Type[];
