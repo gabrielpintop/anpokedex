@@ -1,6 +1,6 @@
 <div *ngIf="showModal" [config]="{ show: true, backdrop: 'static' }" bsModal #pokemonDetailsModal="bs-modal"
   class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
-  <div class="modal-dialog pokemon-modal">
+  <div class="pokemon-modal">
     <div class="modal-content">
       <div class="modal-body">
         <div class="row mt-2 mb-2">
@@ -63,7 +63,7 @@
               <hr />
             </div>
             <div class="col-md-6 col-12">
-              <ul class="list-group list-group-flush">
+              <ul class="list-group">
                 <li class="list-group-item bg-dark text-center text-white">
                   Abilities
                 </li>
@@ -86,6 +86,11 @@
                   This Pokemon doesn't have abilities
                 </li>
               </ul>
+            </div>
+            <div class="col-12 text-center mt-5">
+              <button class="btn btn-dark btn-shadow" (click)="hideModal(pokemonDetailsModal)">
+                <fa-icon [icon]="faTimes"></fa-icon>&nbsp;Close
+              </button>
             </div>
           </ng-container>
         </div>
