@@ -1,0 +1,56 @@
+<div *ngIf="showModal" [config]="{ show: true, backdrop: 'static' }" bsModal #pokemonDetailsModal="bs-modal"
+  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+  <div class="modal-dialog pokemon-modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row mt-2 mb-2">
+          <div *ngIf="!pokemon" class="col-12 text-center mt-5 mb-5">
+            <app-spinner></app-spinner>
+          </div>
+          <ng-container *ngIf="pokemon">
+            <div class="col-12">
+              <button type="button" class="close pull-right mr-1" aria-label="Close"
+                (click)="hideModal(pokemonDetailsModal)">
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </div>
+            <div class="col-6 text-right mb-1">
+              <img class="simplePokemonImage" [src]="pokemon.sprites.front_default" alt="">
+            </div>
+            <div class="col-6 text-left mb-1">
+              <img class="simplePokemonImage" [src]="pokemon.sprites.back_default" alt="">
+            </div>
+            <div class="col-12 text-center mb-0">
+              <h2 class="mb-0">{{pokemon.name | titlecase}}</h2>
+            </div>
+            <div class="col-4 text-center">
+              <h5 class="mb-0">{{getWeightInKilograms(pokemon.weight)}}</h5>
+              <span class="small mt-0">Weight</span>
+            </div>
+            <div class="col-4 text-center my-auto">
+              <span class="badge badge-pill m-1 badge-dark shadow"
+                *ngFor="let type of pokemon.types">{{type.type.name}}</span>
+            </div>
+            <div class="col-4 text-center">
+              <h5 class="mb-0">{{getHeightInMeters(pokemon.height)}}</h5>
+              <span class="small mt-0">Height</span>
+            </div>
+            <div class="col-12">
+              <hr />
+            </div>
+            <!-- <div class="col-md-6 col-12">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item active text-center">Abilities</li>
+                <li class="list-group-item" *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</li>
+              </ul>
+            </div> -->
+            <div class="col-md-6 col-12 mx-auto">
+              <app-pokemon-stats-chart [pokemonStats]="pokemon.stats" [pokemonName]="pokemon.name | titlecase">
+              </app-pokemon-stats-chart>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

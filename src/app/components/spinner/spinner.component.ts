@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-spinner',
@@ -7,11 +7,11 @@ import { faSpinner, IconDefinition } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent implements OnInit {
-  public faSpinner: IconDefinition = faSpinner;
-
-  public iconSize = '2x';
+  public faSpinner = faSpinner;
 
   public iconClasses = 'text-dark';
+
+  public iconSize = '2x';
 
   constructor() {}
 

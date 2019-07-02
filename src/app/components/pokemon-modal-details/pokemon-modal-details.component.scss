@@ -1,0 +1,14 @@
+.pokemon-modal {
+  max-width: 98%;
+}
+
+@media(min-width: 768px) {
+  .simplePokemonImage {
+    width: 160px;
+    height: 160px;
+  }
+
+  p {
+    font-size: 22px;
+  }
+}

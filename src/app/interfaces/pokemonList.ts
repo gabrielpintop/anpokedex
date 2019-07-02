@@ -1,8 +1,8 @@
-import { SimplePokemon } from './simplePokemon';
+import { AttributeInfo } from './attributeInfo';
 
 export interface PokemonList {
   count: number;
-  results: SimplePokemon[];
+  results: AttributeInfo[];
   next?: string;
   previous?: string;
 }

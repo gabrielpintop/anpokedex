@@ -2,7 +2,8 @@
   [infiniteScrollThrottle]="200">
   <ng-container *ngIf="pokemonList.results.length > 0">
     <div *ngFor="let simplePokemon of pokemonList.results; index as i" class="col-lg-3 col-md-4 col-6 text-center">
-      <app-pokemon-simple-details [simplePokemon]="simplePokemon" [pokemonId]="getPokemonId(simplePokemon.url)">
+      <app-pokemon-simple-details (selectPokemon)="getPokemonInformation($event)" [simplePokemon]="simplePokemon"
+        [pokemonId]="getPokemonId(simplePokemon.url)">
       </app-pokemon-simple-details>
     </div>
   </ng-container>
@@ -16,3 +17,6 @@
     <app-spinner *ngIf="loading"></app-spinner>
   </div>
 </div>
+<app-pokemon-modal-details [showModal]="showPokemonInfo" [pokemon]="selectedPokemon"
+  (closeModal)="closePokemonInformationModal()">
+</app-pokemon-modal-details>
