@@ -13,7 +13,7 @@ export class PokemonsListComponent implements OnInit {
 
   private urlSplitLength = 8;
 
-  public loading = true;
+  public loading = false;
 
   public pokemonList: PokemonList = {
     count: 0,
@@ -34,22 +34,22 @@ export class PokemonsListComponent implements OnInit {
 
   // Get the list of pokemons with a defined limit and concatenates the previous pokemons
   getPokemons() {
-    this.loading = true;
-    this.pokemonsService
-      .getPokemonsList(this.pokemonList.next)
-      .then((pokemonList: PokemonList) => {
-        this.pokemonList = {
-          ...pokemonList,
-          results: [].concat(this.pokemonList.results, pokemonList.results)
-        };
-        console.log(pokemonList.results);
-
-        this.loading = false;
-      })
-      .catch((err: string) => {
-        alert(err);
-        this.loading = false;
-      });
+    if (!this.loading) {
+      this.loading = true;
+      this.pokemonsService
+        .getPokemonsList(this.pokemonList.next)
+        .then((pokemonList: PokemonList) => {
+          this.pokemonList = {
+            ...pokemonList,
+            results: [].concat(this.pokemonList.results, pokemonList.results)
+          };
+          this.loading = false;
+        })
+        .catch((err: string) => {
+          alert(err);
+          this.loading = false;
+        });
+    }
   }
 
   // Gets the id of the current Pokemon based on the received url
