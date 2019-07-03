@@ -48,6 +48,27 @@ export class PokemonsService {
     });
   }
 
+  // Gets the information of two different Pokemons
+  getPokemonFightersInformation(
+    firstPokemon: string,
+    secondPokemon: string
+  ): Promise<Pokemon[] | string> {
+    return new Promise((resolve, reject) => {
+      const fightersRequests = [
+        this.getPokemonInfo(firstPokemon),
+        this.getPokemonInfo(secondPokemon)
+      ];
+      Promise.all(fightersRequests)
+        .then((data: Pokemon[]) => {
+          resolve(data);
+        })
+        .catch(error => {
+          console.log(error);
+          reject('There was an error loading the information of the Pokemons');
+        });
+    });
+  }
+
   // Gets the info of a Pokemon specified by it's name
   getPokemonInfo(pokemonName: string): Promise<Pokemon | string> {
     return new Promise((resolve, reject) => {

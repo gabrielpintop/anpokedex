@@ -1,1 +1,46 @@
-<p>pokemon-battle works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div *ngIf="loading" class="col-12 text-center">
+      <app-spinner></app-spinner>
+      <h4 class="mt-1">Prepare to battle...</h4>
+    </div>
+    <ng-container *ngIf="!loading">
+      <div class="col-10 text-center mb-2 mx-auto">
+        <h6 class="mb-0">Use your turn to pick a move and beat your opponent. The moves vary on each turn.</h6>
+      </div>
+      <div class="col-md-7 mx-auto">
+        <div class="card shadow border-dark">
+          <div class="col-12 mx-auto text-right">
+            <img [src]="getImageUrl(pokemonFighters[defender].id, '')" width="150px" alt="">
+            <p>{{pokemonsLife[defender]}} hp</p>
+          </div>
+          <div class="col-12 mx-auto">
+            <img [src]="getImageUrl(pokemonFighters[attacker].id, 'back/')" width="150px" alt="">
+            <p>{{pokemonsLife[attacker]}} hp</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 mx-auto mb-3">
+        <div *ngIf="messageToShow" class="alert alert-dark mt-1" role="alert">
+          <p class="mb-0 text-center" [innerHTML]="messageToShow">
+          </p>
+        </div>
+        <div class="row" *ngIf="showAttacks">
+          <div class="col-12 text-center mt-2">
+            <h4>What will <b>{{pokemonFighters[attacker].name | titlecase}}</b> do?</h4>
+          </div>
+          <div *ngFor="let move of attackerMoves; index as i" class="col-md-6">
+            <div class="card m-2 text-white pointer text-center" (click)="attack(move)"
+              [ngClass]="{'border-primary bg-primary ': i === 0, 'border-danger bg-danger': i === 1, 'border-warning bg-warning': i === 2, 'border-info bg-info': i === 3}">
+              <h5 class="mt-2 mb-2">{{move.move}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-center" *ngIf="endedGame" (click)="loadInitialGame()">
+        <button class="btn btn-dark shadow">Rematch!</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

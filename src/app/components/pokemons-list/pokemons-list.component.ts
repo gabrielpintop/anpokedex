@@ -121,10 +121,10 @@ export class PokemonsListComponent implements OnInit {
   // Selects the fighters and go to the start of the fight
   selectFighters() {
     let url = '';
-    const code = this.translationService.currentLanguage.code;
-    if (code !== 'en') {
-      url += `${code}`;
-    }
+    // const code = this.translationService.currentLanguage.code;
+    // if (code !== 'en') {
+    //   url += `${code}`;
+    // }
     url += `/battle/${this.firstPokemon}/vs/${this.secondPokemon}`;
     this.router.navigate([url]);
   }
