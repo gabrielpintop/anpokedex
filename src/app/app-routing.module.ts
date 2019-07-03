@@ -4,6 +4,7 @@ import { PokemonsListComponent } from './components/pokemons-list/pokemons-list.
 
 const routes: Routes = [
   { path: '', component: PokemonsListComponent },
+  { path: ':language', component: PokemonsListComponent },
   { path: '**', redirectTo: '' }
 ];
 

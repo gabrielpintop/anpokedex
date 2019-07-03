@@ -6,8 +6,9 @@ import {
   faWeightHanging,
   faArrowsAltV
 } from '@fortawesome/free-solid-svg-icons';
-import { PokemonsService } from 'src/app/services/pokemons.service';
+import { PokemonsService } from 'src/app/services/pokemons/pokemons.service';
 import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
+import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
   selector: 'app-pokemon-modal-details',
@@ -15,6 +16,8 @@ import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
   styleUrls: ['./pokemon-modal-details.component.scss']
 })
 export class PokemonModalDetailsComponent implements OnInit {
+  @Input() currentLanguage;
+
   @Input() set pokemon(value: Pokemon) {
     this.currentPokemon = value;
     if (value) {
@@ -44,7 +47,10 @@ export class PokemonModalDetailsComponent implements OnInit {
 
   public abilities = [];
 
-  constructor(private pokemonsService: PokemonsService) {}
+  constructor(
+    private pokemonsService: PokemonsService,
+    private translationService: TranslationService
+  ) {}
 
   ngOnInit() {}
 
@@ -55,7 +61,7 @@ export class PokemonModalDetailsComponent implements OnInit {
 
   // Gets the translation of an specific property
   getTranslation(translate: any) {
-    return this.pokemonsService.getCorrectTranslation(translate, 'en');
+    return this.translationService.getCorrectTranslation(translate);
   }
 
   // Get the weight of the Pokemon in kilograms
@@ -66,8 +72,8 @@ export class PokemonModalDetailsComponent implements OnInit {
   // Hides the current modal
   hideModal(modal: BsModalRef): void {
     modal.hide();
-    this.loadedAbilities = false;
     setTimeout(() => {
+      this.loadedAbilities = false;
       this.closeModal.emit(null);
     }, 200);
   }

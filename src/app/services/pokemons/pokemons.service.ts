@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PokemonList } from '../interfaces/pokemonList';
-import { Pokemon } from '../interfaces/pokemon';
+import { PokemonList } from '../../interfaces/pokemonList';
+import { Pokemon } from '../../interfaces/pokemon';
 import { environment } from 'src/environments/environment.prod';
-import { Ability } from '../interfaces/pokemonAbility';
-import { DetailedInfo } from '../interfaces/detailedInfo';
+import { Ability } from '../../interfaces/pokemonAbility';
+import { DetailedInfo } from '../../interfaces/detailedInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -94,13 +94,6 @@ export class PokemonsService {
           reject('There was an error loading the specie information');
         }
       );
-    });
-  }
-
-  // Gets the translation of an element based on the current page language
-  getCorrectTranslation(translation: any[], language: string): any {
-    return translation.find(element => {
-      return element.language.name === language;
     });
   }
 }

@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="row mr-3 ml-3 mb-3" infiniteScroll (scrolled)="getPokemons()" [infiniteScrollDistance]="1"
   [infiniteScrollThrottle]="200">
   <ng-container *ngIf="pokemonList.results.length > 0">
@@ -9,14 +10,15 @@
   </ng-container>
 
   <div class="col-12 text-center mb-2" *ngIf="!loading && pokemonList.results.length === 0">
-    <h3>There are no Pokemons to show</h3>
+    <h3>{{currentLanguage.NO_POKEMON}}</h3>
   </div>
 
   <div class="col-12 text-center">
-    <button *ngIf="!loading && pokemonList.next" class="btn btn-dark m-2" (click)="getPokemons()">Load more...</button>
+    <button *ngIf="!loading && pokemonList.next" class="btn btn-dark m-2"
+      (click)="getPokemons()">{{currentLanguage.LOAD}}</button>
     <app-spinner *ngIf="loading"></app-spinner>
   </div>
 </div>
-<app-pokemon-modal-details [showModal]="showPokemonInfo" [pokemon]="selectedPokemon"
+<app-pokemon-modal-details [showModal]="showPokemonInfo" [pokemon]="selectedPokemon" [currentLanguage]="currentLanguage"
   [specieInformation]="specieInformation" (closeModal)="closePokemonInformationModal()">
 </app-pokemon-modal-details>

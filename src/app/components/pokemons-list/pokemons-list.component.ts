@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonList } from 'src/app/interfaces/pokemonList';
-import { PokemonsService } from 'src/app/services/pokemons.service';
+import { PokemonsService } from 'src/app/services/pokemons/pokemons.service';
 import { environment } from 'src/environments/environment';
 import { Pokemon } from 'src/app/interfaces/pokemon';
 import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
   selector: 'app-pokemons-list',
@@ -14,6 +16,8 @@ export class PokemonsListComponent implements OnInit {
   private pokemonRequestLimit = '20';
 
   private urlSplitLength = 8;
+
+  public currentLanguage;
 
   public loading = false;
 
@@ -34,7 +38,14 @@ export class PokemonsListComponent implements OnInit {
 
   public showPokemonInfo = false;
 
-  constructor(private pokemonsService: PokemonsService) {}
+  constructor(
+    private pokemonsService: PokemonsService,
+    private translationService: TranslationService
+  ) {
+    this.translationService.currentText.subscribe(value => {
+      this.currentLanguage = value;
+    });
+  }
 
   ngOnInit() {
     this.getPokemons();

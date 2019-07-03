@@ -1,6 +1,15 @@
-<div class="container text-center mt-4 mb-5">
-  <a [routerLink]="['']">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
-      alt="Pokemon logo">
-  </a>
+<div class="row mt-4 mb-5">
+  <div class="col-2 d-sm-block d-none"></div>
+  <div class="col-sm-8 col-10 text-center">
+    <a [routerLink]="['']">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+        alt="Pokemon logo">
+    </a>
+  </div>
+  <div class="col-2 text-right">
+    <ng-container *ngFor="let language of languages; index as i">
+      <img *ngIf="i !== currentLanguage" class="mr-3 mb-2 shadow pointer" [src]="language.flag" width="30px"
+        height="20px" [title]="language.language" [alt]="language.language" (click)="changeLanguage(language.code)">
+    </ng-container>
+  </div>
 </div>

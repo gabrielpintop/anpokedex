@@ -9,8 +9,8 @@
           </div>
           <ng-container *ngIf="pokemon">
             <div class="col-12">
-              <button type="button" class="close pull-right mr-1" aria-label="Close"
-                (click)="hideModal(pokemonDetailsModal)">
+              <button type="button" [attr.disabled]="!loadedAbilities ? true : null" class="close pull-right mr-1"
+                aria-label="Close" (click)="hideModal(pokemonDetailsModal)">
                 <fa-icon [icon]="faTimes"></fa-icon>
               </button>
             </div>
@@ -26,7 +26,7 @@
             <div class="col-4 text-center">
               <h5 class="mb-0">{{ getWeightInKilograms(pokemon.weight) }}</h5>
               <span class="small mt-0">
-                <fa-icon [icon]="faWeightHanging"></fa-icon>&nbsp;Weight
+                <fa-icon [icon]="faWeightHanging"></fa-icon>&nbsp;{{currentLanguage.WEIGHT}}
               </span>
             </div>
             <div class="col-4 text-center my-auto">
@@ -36,7 +36,7 @@
             <div class="col-4 text-center">
               <h5 class="mb-0">{{ getHeightInMeters(pokemon.height) }}</h5>
               <span class="small mt-0">
-                <fa-icon [icon]="faArrowsAltV"></fa-icon>&nbsp;Height
+                <fa-icon [icon]="faArrowsAltV"></fa-icon>&nbsp;{{currentLanguage.HEIGHT}}
               </span>
             </div>
             <div class="col-12">
@@ -65,7 +65,7 @@
             <div class="col-md-6 col-12">
               <ul class="list-group">
                 <li class="list-group-item bg-dark text-center text-white">
-                  Abilities
+                  {{currentLanguage.ABILITIES}}
                 </li>
                 <ng-container *ngIf="loadedAbilities && abilities.length > 0">
                   <li class="list-group-item" *ngFor="let ability of abilities">
@@ -88,8 +88,9 @@
               </ul>
             </div>
             <div class="col-12 text-center mt-5">
-              <button class="btn btn-dark btn-shadow" (click)="hideModal(pokemonDetailsModal)">
-                <fa-icon [icon]="faTimes"></fa-icon>&nbsp;Close
+              <button class="btn btn-dark btn-shadow" [attr.disabled]="!loadedAbilities ? true : null"
+                (click)="hideModal(pokemonDetailsModal)">
+                <fa-icon [icon]="faTimes"></fa-icon>&nbsp;{{currentLanguage.CLOSE}}
               </button>
             </div>
           </ng-container>
