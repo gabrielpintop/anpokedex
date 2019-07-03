@@ -1,14 +1,14 @@
 <div class="row mt-4 mb-4">
   <div class="col-2 d-sm-block d-none"></div>
-  <div class="col-sm-8 col-10 text-center">
+  <div class="col-md-8 col-12 text-center">
     <a [routerLink]="['/' + languages[currentLanguage].code]">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
         alt="Pokemon logo">
     </a>
   </div>
-  <div class="col-2 text-right">
+  <div class="col-md-2 col-12 text-center">
     <ng-container *ngFor="let language of languages; index as i">
-      <img *ngIf="i !== currentLanguage" class="mr-3 mb-2 shadow pointer" [src]="language.flag" width="30px"
+      <img *ngIf="i !== currentLanguage" class="mb-2 shadow pointer m-2" [src]="language.flag" width="30px"
         height="20px" [title]="language.language" [alt]="language.language" (click)="changeLanguage(language.code)">
     </ng-container>
   </div>

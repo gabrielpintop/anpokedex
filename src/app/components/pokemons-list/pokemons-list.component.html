@@ -23,7 +23,7 @@
 </div>
 
 <div class="float-div">
-  <button *ngIf="!fight" class="btn btn-primary float-button" (click)="fight = true">
+  <button *ngIf="!fight && pokemonList.results.length > 1" class="btn btn-primary float-button" (click)="fight = true">
     <span>{{currentLanguage.POKEMON_BATTLE}}</span>
   </button>
   <button *ngIf="fight && firstPokemon && secondPokemon" class="btn btn-primary float-button m-2 text-white"
@@ -41,7 +41,7 @@
     <ng-template #noSecondPokemonBlock>Pokemon 2</ng-template>
   </button>
 
-  <button *ngIf="fight" class="btn btn-info m-2" (click)="cancelBattle()">
+  <button *ngIf="fight" class="btn btn-info float-button m-2" (click)="cancelBattle()">
     <fa-icon [icon]="faTimesCircle"></fa-icon>
   </button>
 </div>

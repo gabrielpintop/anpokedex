@@ -93,7 +93,6 @@ export class PokemonBattleComponent implements OnInit {
         this.secondPokemonName
       )
       .then((pokemonFighters: Pokemon[]) => {
-        console.log(pokemonFighters);
         this.pokemonFighters = pokemonFighters;
         this.loadInitialGame();
         this.loading = false;
