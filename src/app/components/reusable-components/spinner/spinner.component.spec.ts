@@ -22,4 +22,9 @@ describe('SpinnerComponent', () => {
   it('should create SpinnerComponent', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a fa-icon element', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('fa-icon')).toBeTruthy();
+  });
 });
