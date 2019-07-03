@@ -20,6 +20,8 @@ export class PokemonsService {
       );
       Promise.all(pokemonAbilitiesPromises)
         .then((data: DetailedInfo[]) => {
+          console.log(data);
+
           resolve(data);
         })
         .catch(err => {
