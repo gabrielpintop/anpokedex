@@ -18,20 +18,9 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 export class PokemonModalDetailsComponent implements OnInit {
   @Input() currentLanguage;
 
-  @Input() set pokemon(value: Pokemon) {
-    this.currentPokemon = value;
-    if (value) {
-      this.loadAbilities();
-    }
-  }
-
-  get pokemon(): Pokemon {
-    return this.currentPokemon;
-  }
+  @Input() pokemonName;
 
   @Input() showModal: boolean;
-
-  @Input() specieInformation: DetailedInfo;
 
   @Output() closeModal = new EventEmitter<null>();
 
@@ -41,7 +30,9 @@ export class PokemonModalDetailsComponent implements OnInit {
 
   public faArrowsAltV = faArrowsAltV;
 
-  private currentPokemon: Pokemon;
+  public pokemon: Pokemon;
+
+  public specieInformation: DetailedInfo;
 
   public loadedAbilities = false;
 
@@ -52,7 +43,37 @@ export class PokemonModalDetailsComponent implements OnInit {
     private translationService: TranslationService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getPokemonInformation();
+  }
+
+  // Gets the information of the Pokemon
+  getPokemonInformation() {
+    this.pokemonsService
+      .getPokemonInfo(this.pokemonName)
+      .then((pokemon: Pokemon) => {
+        this.getPokemonSpecieInformation(pokemon.species.url, pokemon);
+      })
+      .catch(err => {
+        this.loadedAbilities = false;
+        this.closeModal.emit(null);
+        alert(err);
+      });
+  }
+
+  // Get pokemon specie information
+  getPokemonSpecieInformation(specieUrl: string, pokemon: Pokemon): void {
+    this.pokemonsService
+      .getPokemonSpecieInformation(specieUrl)
+      .then((data: DetailedInfo) => {
+        this.specieInformation = data;
+        this.pokemon = pokemon;
+        this.loadAbilities();
+      })
+      .catch(err => {
+        this.pokemon = pokemon;
+      });
+  }
 
   // Get the height of the Pokemon in meters
   getHeightInMeters(height: number): string {
@@ -80,9 +101,9 @@ export class PokemonModalDetailsComponent implements OnInit {
 
   // Load the Pokemon's abilities information
   loadAbilities(): void {
-    if (this.currentPokemon.abilities.length > 0) {
+    if (this.pokemon.abilities.length > 0) {
       this.pokemonsService
-        .getPokemonAbilities(this.currentPokemon.abilities)
+        .getPokemonAbilities(this.pokemon.abilities)
         .then((abilities: DetailedInfo[]) => {
           this.abilities = abilities;
           this.loadedAbilities = true;

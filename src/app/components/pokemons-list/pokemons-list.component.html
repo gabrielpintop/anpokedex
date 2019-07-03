@@ -45,6 +45,6 @@
   </button>
 </div>
 
-<app-pokemon-modal-details [showModal]="showPokemonInfo" [pokemon]="selectedPokemon" [currentLanguage]="currentLanguage"
-  [specieInformation]="specieInformation" (closeModal)="closePokemonInformationModal()">
+<app-pokemon-modal-details *ngIf="showPokemonInfo" [showModal]="showPokemonInfo" [pokemonName]="selectedPokemon"
+  [currentLanguage]="currentLanguage" (closeModal)="closePokemonInformationModal()">
 </app-pokemon-modal-details>

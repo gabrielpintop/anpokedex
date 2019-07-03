@@ -41,11 +41,7 @@ export class PokemonsListComponent implements OnInit {
     results: []
   };
 
-  public selectedPokemon: Pokemon;
-
-  public specieInformation: any;
-
-  public selectedPokemonSpecie;
+  public selectedPokemon: string;
 
   public showPokemonInfo = false;
 
@@ -73,8 +69,7 @@ export class PokemonsListComponent implements OnInit {
   // Closes the pokemon information modal
   closePokemonInformationModal(): void {
     this.showPokemonInfo = false;
-    this.selectedPokemon = null;
-    this.specieInformation = null;
+    this.selectedPokemon = '';
   }
 
   // Get the list of pokemons with a defined limit and concatenates the previous pokemons
@@ -103,7 +98,7 @@ export class PokemonsListComponent implements OnInit {
     return url.split('/')[this.urlSplitLength - 2];
   }
 
-  // Gets the information of the pokemon by it's name or select the Pokemons to battle
+  // Shows pokemon details info or select the Pokemons to battle
   getPokemonInformation(pokemonName: string): void {
     if (this.fight) {
       if (!this.firstPokemon && this.secondPokemon !== pokemonName) {
@@ -118,34 +113,9 @@ export class PokemonsListComponent implements OnInit {
         this.firstPokemon = pokemonName;
       }
     } else {
+      this.selectedPokemon = pokemonName;
       this.showPokemonInfo = true;
-      this.pokemonsService
-        .getPokemonInfo(pokemonName)
-        .then((pokemon: Pokemon) => {
-          console.log(pokemon);
-
-          this.getPokemonSpecieInformation(pokemon.species.url, pokemon);
-        })
-        .catch(err => {
-          this.showPokemonInfo = false;
-          alert(err);
-        });
     }
-  }
-
-  // Get pokemon specie information
-  getPokemonSpecieInformation(specieUrl: string, pokemon: Pokemon): void {
-    this.pokemonsService
-      .getPokemonSpecieInformation(specieUrl)
-      .then((data: DetailedInfo) => {
-        console.log(data);
-
-        this.specieInformation = data;
-        this.selectedPokemon = pokemon;
-      })
-      .catch(err => {
-        this.selectedPokemon = pokemon;
-      });
   }
 
   // Selects the fighters and go to the start of the fight
