@@ -27,7 +27,9 @@ export class PokemonStatsChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.loadPokemonStats();
+    if (this.pokemonStats) {
+      this.loadPokemonStats();
+    }
   }
 
   // Gets the name with the title case pipe

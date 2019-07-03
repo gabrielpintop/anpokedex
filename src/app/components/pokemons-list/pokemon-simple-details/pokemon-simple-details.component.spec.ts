@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PokemonSimpleDetailsComponent } from './pokemon-simple-details.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('PokemonSimpleDetailsComponent', () => {
   let component: PokemonSimpleDetailsComponent;
@@ -8,9 +8,9 @@ describe('PokemonSimpleDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokemonSimpleDetailsComponent ]
-    })
-    .compileComponents();
+      imports: [FontAwesomeModule],
+      declarations: [PokemonSimpleDetailsComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('PokemonSimpleDetailsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create PokemonSimpleDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 });

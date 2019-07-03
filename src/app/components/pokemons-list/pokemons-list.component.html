@@ -2,7 +2,8 @@
 <div class="row mr-3 ml-3 mb-3" infiniteScroll (scrolled)="getPokemons()" [infiniteScrollDistance]="1"
   [infiniteScrollThrottle]="200">
   <ng-container *ngIf="pokemonList.results.length > 0">
-    <div *ngFor="let simplePokemon of pokemonList.results; index as i" class="col-lg-3 col-md-4 col-6 text-center">
+    <div *ngFor="let simplePokemon of pokemonList.results; index as i"
+      class="col-lg-3 col-md-4 col-6 text-center my-auto">
       <app-pokemon-simple-details [firstPokemon]="fight && firstPokemon === simplePokemon.name"
         [secondPokemon]="fight && secondPokemon === simplePokemon.name" (selectPokemon)="getPokemonInformation($event)"
         [simplePokemon]="simplePokemon" [pokemonId]="getPokemonId(simplePokemon.url)">

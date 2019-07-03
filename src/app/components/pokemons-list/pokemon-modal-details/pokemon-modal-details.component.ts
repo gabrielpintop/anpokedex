@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/public_api';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
 import { Pokemon } from 'src/app/interfaces/pokemon';
+import { PokemonsService } from 'src/app/services/pokemons/pokemons.service';
+import { TranslationService } from 'src/app/services/translation/translation.service';
 import {
   faTimes,
   faWeightHanging,
   faArrowsAltV
 } from '@fortawesome/free-solid-svg-icons';
-import { PokemonsService } from 'src/app/services/pokemons/pokemons.service';
-import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
-import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
   selector: 'app-pokemon-modal-details',

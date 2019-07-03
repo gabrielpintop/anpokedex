@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SpinnerComponent } from './spinner.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('SpinnerComponent', () => {
   let component: SpinnerComponent;
@@ -8,9 +8,9 @@ describe('SpinnerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ]
-    })
-    .compileComponents();
+      imports: [FontAwesomeModule],
+      declarations: [SpinnerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('SpinnerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create SpinnerComponent', () => {
     expect(component).toBeTruthy();
   });
 });

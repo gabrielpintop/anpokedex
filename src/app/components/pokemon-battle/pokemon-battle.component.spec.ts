@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from '../reusable-components/navbar/navbar.component';
 import { PokemonBattleComponent } from './pokemon-battle.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SpinnerComponent } from '../reusable-components/spinner/spinner.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('PokemonBattleComponent', () => {
   let component: PokemonBattleComponent;
@@ -8,9 +12,9 @@ describe('PokemonBattleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokemonBattleComponent ]
-    })
-    .compileComponents();
+      imports: [FontAwesomeModule, HttpClientModule, RouterTestingModule],
+      declarations: [NavbarComponent, PokemonBattleComponent, SpinnerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +23,7 @@ describe('PokemonBattleComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create PokemonBattleComponent', () => {
     expect(component).toBeTruthy();
   });
 });

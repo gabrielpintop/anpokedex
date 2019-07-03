@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ChartsModule } from 'ng2-charts';
 import { PokemonStatsChartComponent } from './pokemon-stats-chart.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('PokemonStatsChartComponent', () => {
   let component: PokemonStatsChartComponent;
@@ -8,9 +8,9 @@ describe('PokemonStatsChartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokemonStatsChartComponent ]
-    })
-    .compileComponents();
+      imports: [ChartsModule],
+      declarations: [PokemonStatsChartComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('PokemonStatsChartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create PokemonStatsChartComponent', () => {
     expect(component).toBeTruthy();
   });
 });

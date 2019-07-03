@@ -14,11 +14,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Service
 import { PokemonsService } from './services/pokemons/pokemons.service';
-import { PokemonSimpleDetailsComponent } from './components/pokemon-simple-details/pokemon-simple-details.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
-import { PokemonModalDetailsComponent } from './components/pokemon-modal-details/pokemon-modal-details.component';
-import { PokemonStatsChartComponent } from './components/pokemon-stats-chart/pokemon-stats-chart.component';
+import { PokemonSimpleDetailsComponent } from './components/pokemons-list/pokemon-simple-details/pokemon-simple-details.component';
+import { NavbarComponent } from './components/reusable-components/navbar/navbar.component';
+import { SpinnerComponent } from './components/reusable-components/spinner/spinner.component';
+import { PokemonModalDetailsComponent } from './components/pokemons-list/pokemon-modal-details/pokemon-modal-details.component';
+import { PokemonStatsChartComponent } from './components/pokemons-list/pokemon-stats-chart/pokemon-stats-chart.component';
 import { TranslationService } from './services/translation/translation.service';
 import { PokemonBattleComponent } from './components/pokemon-battle/pokemon-battle.component';
 
