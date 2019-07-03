@@ -4,8 +4,9 @@ import { PokemonsService } from 'src/app/services/pokemons/pokemons.service';
 import { environment } from 'src/environments/environment';
 import { Pokemon } from 'src/app/interfaces/pokemon';
 import { DetailedInfo } from 'src/app/interfaces/detailedInfo';
-import { ActivatedRoute, Router } from '@angular/router';
+import { faHandRock, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { TranslationService } from 'src/app/services/translation/translation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemons-list',
@@ -17,9 +18,19 @@ export class PokemonsListComponent implements OnInit {
 
   private urlSplitLength = 8;
 
+  public fight = false;
+
+  public firstPokemon = '';
+
+  public secondPokemon = '';
+
   public currentLanguage;
 
   public loading = false;
+
+  public faHandRock = faHandRock;
+
+  public faTimesCircle = faTimesCircle;
 
   public pokemonList: PokemonList = {
     count: 0,
@@ -40,6 +51,7 @@ export class PokemonsListComponent implements OnInit {
 
   constructor(
     private pokemonsService: PokemonsService,
+    private router: Router,
     private translationService: TranslationService
   ) {
     this.translationService.currentText.subscribe(value => {
@@ -49,6 +61,13 @@ export class PokemonsListComponent implements OnInit {
 
   ngOnInit() {
     this.getPokemons();
+  }
+
+  // Cleans the selected Pokemons
+  cancelBattle() {
+    this.firstPokemon = '';
+    this.secondPokemon = '';
+    this.fight = false;
   }
 
   // Closes the pokemon information modal
@@ -84,18 +103,34 @@ export class PokemonsListComponent implements OnInit {
     return url.split('/')[this.urlSplitLength - 2];
   }
 
-  // Gets the information of the pokemon by it's name
+  // Gets the information of the pokemon by it's name or select the Pokemons to battle
   getPokemonInformation(pokemonName: string): void {
-    this.showPokemonInfo = true;
-    this.pokemonsService
-      .getPokemonInfo(pokemonName)
-      .then((pokemon: Pokemon) => {
-        this.getPokemonSpecieInformation(pokemon.species.url, pokemon);
-      })
-      .catch(err => {
-        this.showPokemonInfo = false;
-        alert(err);
-      });
+    if (this.fight) {
+      if (!this.firstPokemon && this.secondPokemon !== pokemonName) {
+        this.firstPokemon = pokemonName;
+      } else if (this.firstPokemon === pokemonName) {
+        this.firstPokemon = '';
+      } else if (!this.secondPokemon && this.firstPokemon !== pokemonName) {
+        this.secondPokemon = pokemonName;
+      } else if (this.secondPokemon === pokemonName) {
+        this.secondPokemon = '';
+      } else {
+        this.firstPokemon = pokemonName;
+      }
+    } else {
+      this.showPokemonInfo = true;
+      this.pokemonsService
+        .getPokemonInfo(pokemonName)
+        .then((pokemon: Pokemon) => {
+          console.log(pokemon);
+
+          this.getPokemonSpecieInformation(pokemon.species.url, pokemon);
+        })
+        .catch(err => {
+          this.showPokemonInfo = false;
+          alert(err);
+        });
+    }
   }
 
   // Get pokemon specie information
@@ -103,11 +138,24 @@ export class PokemonsListComponent implements OnInit {
     this.pokemonsService
       .getPokemonSpecieInformation(specieUrl)
       .then((data: DetailedInfo) => {
+        console.log(data);
+
         this.specieInformation = data;
         this.selectedPokemon = pokemon;
       })
       .catch(err => {
         this.selectedPokemon = pokemon;
       });
+  }
+
+  // Selects the fighters and go to the start of the fight
+  selectFighters() {
+    let url = '';
+    const code = this.translationService.currentLanguage.code;
+    if (code !== 'en') {
+      url += `${code}`;
+    }
+    url += `/battle/${this.firstPokemon}/vs/${this.secondPokemon}`;
+    this.router.navigate([url]);
   }
 }

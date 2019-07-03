@@ -35,7 +35,8 @@ export class TranslationService {
       WEIGHT: 'Weight',
       HEIGHT: 'Height',
       ABILITIES: 'Abilities',
-      CLOSE: 'Close'
+      CLOSE: 'Close',
+      POKEMON_BATTLE: 'Make click for a Pokemon battle'
     },
     es: {
       LOAD: 'Cargar más...',
@@ -43,7 +44,8 @@ export class TranslationService {
       WEIGHT: 'Peso',
       HEIGHT: 'Altura',
       ABILITIES: 'Habilidades',
-      CLOSE: 'Cerrar'
+      CLOSE: 'Cerrar',
+      POKEMON_BATTLE: 'Haz clic para una batalla Pokemon'
     },
     fr: {
       LOAD: 'Obtenir plus...',
@@ -51,13 +53,14 @@ export class TranslationService {
       WEIGHT: 'Poids',
       HEIGHT: 'La taille',
       ABILITIES: 'Les capacités',
-      CLOSE: 'Fermer'
+      CLOSE: 'Fermer',
+      POKEMON_BATTLE: 'Clique pour une bataille Pokemon'
     }
   };
 
   public currentText = new BehaviorSubject(this.languagesText.en);
 
-  private currentLanguage = this.languages[0];
+  public currentLanguage = this.languages[0];
 
   constructor(private titleService: Title) {}
 

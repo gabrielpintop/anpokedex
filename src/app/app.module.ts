@@ -20,6 +20,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PokemonModalDetailsComponent } from './components/pokemon-modal-details/pokemon-modal-details.component';
 import { PokemonStatsChartComponent } from './components/pokemon-stats-chart/pokemon-stats-chart.component';
 import { TranslationService } from './services/translation/translation.service';
+import { PokemonBattleComponent } from './components/pokemon-battle/pokemon-battle.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TranslationService } from './services/translation/translation.service';
     PokemonModalDetailsComponent,
     NavbarComponent,
     SpinnerComponent,
-    PokemonStatsChartComponent
+    PokemonStatsChartComponent,
+    PokemonBattleComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,4 +1,9 @@
-<div class="card text-center mr-1 ml-1 mb-4 shadow border-white pointer" (click)="selectCurrentPokemon()">
+<div class="card text-center mr-1 ml-1 mb-4 shadow border-white pointer"
+  [ngClass]="{'bg-dark border-dark': firstPokemon, 'bg-danger border-danger': secondPokemon}"
+  (click)="selectCurrentPokemon()">
+  <div class="text-right">
+    <fa-icon *ngIf="firstPokemon || secondPokemon" [icon]="faTimes" [classes]="[iconClasses]"></fa-icon>
+  </div>
   <img class="simplePokemonImage mx-auto mb-0" [src]="getImageUrl()" [alt]="simplePokemon.name">
-  <p class="mt-0">{{simplePokemon.name | titlecase}}</p>
+  <p [ngClass]="{'text-white': firstPokemon || secondPokemon}" class="mt-0">{{simplePokemon.name | titlecase}}</p>
 </div>

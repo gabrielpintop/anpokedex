@@ -3,8 +3,9 @@
   [infiniteScrollThrottle]="200">
   <ng-container *ngIf="pokemonList.results.length > 0">
     <div *ngFor="let simplePokemon of pokemonList.results; index as i" class="col-lg-3 col-md-4 col-6 text-center">
-      <app-pokemon-simple-details (selectPokemon)="getPokemonInformation($event)" [simplePokemon]="simplePokemon"
-        [pokemonId]="getPokemonId(simplePokemon.url)">
+      <app-pokemon-simple-details [firstPokemon]="fight && firstPokemon === simplePokemon.name"
+        [secondPokemon]="fight && secondPokemon === simplePokemon.name" (selectPokemon)="getPokemonInformation($event)"
+        [simplePokemon]="simplePokemon" [pokemonId]="getPokemonId(simplePokemon.url)">
       </app-pokemon-simple-details>
     </div>
   </ng-container>
@@ -13,12 +14,37 @@
     <h3>{{currentLanguage.NO_POKEMON}}</h3>
   </div>
 
-  <div class="col-12 text-center">
+  <div class="col-12 text-center mb-5">
     <button *ngIf="!loading && pokemonList.next" class="btn btn-dark m-2"
       (click)="getPokemons()">{{currentLanguage.LOAD}}</button>
     <app-spinner *ngIf="loading"></app-spinner>
   </div>
 </div>
+
+<div class="float-div">
+  <button *ngIf="!fight" class="btn btn-primary float-button" (click)="fight = true">
+    <span>{{currentLanguage.POKEMON_BATTLE}}</span>
+  </button>
+  <button *ngIf="fight && firstPokemon && secondPokemon" class="btn btn-primary float-button m-2 text-white"
+    (click)="selectFighters()">
+    <fa-icon [icon]="faHandRock"></fa-icon>
+  </button>
+  <button *ngIf="fight" class="btn btn-dark float-button m-2 shadow-none" (click)="firstPokemon = ''">
+    <div *ngIf="firstPokemon; then firstPokemonBlock else noFirstPokemonBlock"></div>
+    <ng-template #firstPokemonBlock>{{firstPokemon | titlecase}}</ng-template>
+    <ng-template #noFirstPokemonBlock>Pokemon 1</ng-template>
+  </button>
+  <button *ngIf="fight" class="btn btn-danger float-button m-2 shadow-none" (click)="secondPokemon = ''">
+    <div *ngIf="secondPokemon; then secondPokemonBlock else noSecondPokemonBlock"></div>
+    <ng-template #secondPokemonBlock>{{secondPokemon | titlecase}}</ng-template>
+    <ng-template #noSecondPokemonBlock>Pokemon 2</ng-template>
+  </button>
+
+  <button *ngIf="fight" class="btn btn-info m-2" (click)="cancelBattle()">
+    <fa-icon [icon]="faTimesCircle"></fa-icon>
+  </button>
+</div>
+
 <app-pokemon-modal-details [showModal]="showPokemonInfo" [pokemon]="selectedPokemon" [currentLanguage]="currentLanguage"
   [specieInformation]="specieInformation" (closeModal)="closePokemonInformationModal()">
 </app-pokemon-modal-details>
