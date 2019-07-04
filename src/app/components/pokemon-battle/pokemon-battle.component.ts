@@ -44,11 +44,15 @@ export class PokemonBattleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadPokemonsInformation();
+    if (this.firstPokemonName !== '' && this.secondPokemonName !== '') {
+      this.loadPokemonsInformation();
+    } else {
+      this.router.navigate(['']);
+    }
   }
 
   // Executes and attack on the deffender Pokemon
-  attack(attack) {
+  attack(attack): void {
     this.showAttacks = false;
     this.messageToShow = `<b>${this.getTitleCaseText(
       this.pokemonFighters[this.attacker].name
@@ -78,7 +82,7 @@ export class PokemonBattleComponent implements OnInit {
   }
 
   // Loads the initial game configurations
-  loadInitialGame() {
+  loadInitialGame(): void {
     this.endedGame = false;
     this.pokemonsLife[0] = this.findPokemonHp(this.pokemonFighters[0].stats);
     this.pokemonsLife[1] = this.findPokemonHp(this.pokemonFighters[1].stats);
@@ -86,7 +90,7 @@ export class PokemonBattleComponent implements OnInit {
   }
 
   // Loads the information of the Pokemons that are going to fight
-  loadPokemonsInformation() {
+  loadPokemonsInformation(): void {
     this.pokemonsService
       .getPokemonFightersInformation(
         this.firstPokemonName,
@@ -109,7 +113,7 @@ export class PokemonBattleComponent implements OnInit {
   }
 
   // Generates a set of 4 moves for the attacker
-  generateAttackerMoves() {
+  generateAttackerMoves(): void {
     this.attackerMoves = [];
     const moves = this.pokemonFighters[this.attacker].moves;
     const movesLength = moves.length;
@@ -137,7 +141,7 @@ export class PokemonBattleComponent implements OnInit {
   }
 
   // Finds the Pokemon health points
-  findPokemonHp(pokemonStats: Stat[]) {
+  findPokemonHp(pokemonStats: Stat[]): number {
     const hpStat = pokemonStats.find(
       pokemonStat => pokemonStat.stat.name === 'hp'
     );
@@ -149,12 +153,12 @@ export class PokemonBattleComponent implements OnInit {
   }
 
   // Gets a text as Title pipe
-  getTitleCaseText(text): string {
+  getTitleCaseText(text: string): string {
     return new TitleCasePipe().transform(text);
   }
 
   // Adds a move to the array of moves of the attacker
-  addMoveToAttackerArray(moveName) {
+  addMoveToAttackerArray(moveName: string) {
     this.attackerMoves.push({
       move: moveName,
       attack: Math.floor(Math.random() * 10) + 1
