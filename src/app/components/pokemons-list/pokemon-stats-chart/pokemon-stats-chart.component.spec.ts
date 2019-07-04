@@ -22,4 +22,14 @@ describe('PokemonStatsChartComponent', () => {
   it('should create PokemonStatsChartComponent', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get getTitleCasePipe', () => {
+    expect(component.getTitleCasePipe('charizard')).toEqual('Charizard');
+  });
+
+  it('should render Canvas', () => {
+    const pokemonStatsChart: HTMLElement = fixture.nativeElement;
+    const canvas = pokemonStatsChart.querySelector('canvas');
+    expect(canvas).toBeTruthy();
+  });
 });

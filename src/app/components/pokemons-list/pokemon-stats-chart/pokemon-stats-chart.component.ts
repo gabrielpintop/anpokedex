@@ -40,7 +40,6 @@ export class PokemonStatsChartComponent implements OnInit {
   // Loads the pokemon stats in the corresponding format for the chart
   loadPokemonStats() {
     this.radarChartData[0].label = this.pokemonName + ' stats';
-
     this.pokemonStats.map((stat: Stat) => {
       this.radarChartLabels.push(this.getTitleCasePipe(stat.stat.name));
       this.radarChartData[0].data.push(stat.base_stat);

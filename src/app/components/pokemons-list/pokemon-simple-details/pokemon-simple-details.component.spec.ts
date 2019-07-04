@@ -22,4 +22,28 @@ describe('PokemonSimpleDetailsComponent', () => {
   it('should create PokemonSimpleDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should getImageUrl', () => {
+    component.pokemonId = '1';
+    expect(component.getImageUrl()).toEqual(
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'
+    );
+  });
+
+  it('should render PokemonSimpleDetails', () => {
+    const pokemonSimpleDetails: HTMLElement = fixture.nativeElement;
+    let card = pokemonSimpleDetails.querySelector('.card');
+    expect(card).toBeFalsy();
+    component.simplePokemon = {
+      name: 'pikachu',
+      url: 'https://pokeapi.co/api/v2/pokemon/1'
+    };
+    fixture.autoDetectChanges();
+    card = pokemonSimpleDetails.querySelector('.card');
+    const image = pokemonSimpleDetails.querySelector('img');
+    const p = pokemonSimpleDetails.querySelector('p');
+    expect(card).toBeTruthy();
+    expect(image).toBeTruthy();
+    expect(p.innerHTML.toLocaleLowerCase()).toContain('pikachu');
+  });
 });
