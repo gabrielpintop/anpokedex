@@ -36,7 +36,8 @@ export class TranslationService {
       HEIGHT: 'Height',
       ABILITIES: 'Abilities',
       CLOSE: 'Close',
-      POKEMON_BATTLE: 'Make click for a Pokemon battle'
+      POKEMON_BATTLE: 'Make click for a Pokemon battle',
+      APP_DESCRIPTION: `Select a Pokemon to see it's details or participate in a Pokemon battle by clicking the blue button.`
     },
     es: {
       LOAD: 'Cargar más...',
@@ -45,7 +46,8 @@ export class TranslationService {
       HEIGHT: 'Altura',
       ABILITIES: 'Habilidades',
       CLOSE: 'Cerrar',
-      POKEMON_BATTLE: 'Haz clic para una batalla Pokemon'
+      POKEMON_BATTLE: 'Haz clic para una batalla Pokemon',
+      APP_DESCRIPTION: `Selecciona un Pokemon para ver sus detalles o participa en una batalla de Pokémon haciendo clic en el botón azul.`
     },
     fr: {
       LOAD: 'Obtenir plus...',
@@ -54,7 +56,8 @@ export class TranslationService {
       HEIGHT: 'La taille',
       ABILITIES: 'Les capacités',
       CLOSE: 'Fermer',
-      POKEMON_BATTLE: 'Clique pour une bataille Pokemon'
+      POKEMON_BATTLE: 'Clique pour une bataille Pokemon',
+      APP_DESCRIPTION: `Sélectionnez un Pokemon pour voir ses détails ou participez à une bataille de Pokémon en cliquant sur le bouton bleu.`
     }
   };
 

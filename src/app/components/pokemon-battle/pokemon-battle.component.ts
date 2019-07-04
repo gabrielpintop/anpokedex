@@ -34,6 +34,8 @@ export class PokemonBattleComponent implements OnInit {
 
   public showAttacks = false;
 
+  public hideImages = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -73,10 +75,14 @@ export class PokemonBattleComponent implements OnInit {
         this.endedGame = true;
       } else {
         this.pokemonsLife[this.defender] = defenderLife;
-        const until = this.attacker;
-        this.attacker = this.defender;
-        this.defender = until;
-        this.generateAttackerMoves();
+        this.hideImages = true;
+        setTimeout(() => {
+          this.hideImages = false;
+          const until = this.attacker;
+          this.attacker = this.defender;
+          this.defender = until;
+          this.generateAttackerMoves();
+        }, 200);
       }
     }, 3000);
   }
