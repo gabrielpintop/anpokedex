@@ -1,6 +1,14 @@
 # Anpokedex
 
+By [Gabriel Pinto](https://gabrielpinto.me)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
+
+## Prepare the project
+
+1. Make sure that you have Node JS installed
+2. Make sure that you have angular-cli installed
+3. Run `npm i` to install all the required dependencies
 
 ## Development server
 
